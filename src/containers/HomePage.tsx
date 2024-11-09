@@ -11,23 +11,23 @@ const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 1;
-  width: calc(100% - 10rem);
-  padding: 5rem;
+  width: calc(100% - 4rem);
+  padding: 2rem;
   background-color: transparent;
 
   @media (max-width: 1440px) {
     padding: 2rem;
-    width: calc(100% - 10rem);
+    width: calc(100% - 4rem);
   }
 
   @media (max-width: 768px) {
     padding: 1rem;
-    width: calc(100% - 5rem);
+    width: calc(100% - 2rem);
   }
 
   @media (max-width: 375px) {
     padding: 0.5rem;
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
   }
 `
 

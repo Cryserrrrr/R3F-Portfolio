@@ -8,14 +8,14 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 10rem);
-  font-size: 5rem;
-  padding: 5rem;
+  width: calc(100% - 4rem);
+  font-size: 2.5rem;
+  padding: 2rem;
 
   @media (max-width: 1440px) {
     font-size: 2rem;
     padding: 2rem;
-    width: calc(100% - 5rem);
+    width: calc(100% - 4rem);
   }
 
   @media (max-width: 768px) {

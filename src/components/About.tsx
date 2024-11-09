@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const TextContainer = styled.div`
-  padding-bottom: 10rem;
+  padding-bottom: 2rem;
 
   @media (max-width: 1440px) {
     padding-bottom: 5rem;
@@ -29,7 +29,7 @@ const TextContainer = styled.div`
 `
 
 const Text = styled.div`
-  font-size: 4rem;
+  font-size: 2rem;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;

@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const TitleContainer = styled.div`
-  padding-bottom: 10rem;
+  padding-bottom: 5rem;
 
   @media (max-width: 1440px) {
     padding-bottom: 5rem;
@@ -29,7 +29,7 @@ const TitleContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: 25rem;
+  font-size: 8rem;
   margin: 0;
 
   @media (max-width: 1440px) {
@@ -46,7 +46,7 @@ const Title = styled.h1`
 `
 
 const Subtitle = styled.h2`
-  font-size: 5rem;
+  font-size: 2.5rem;
 
   @media (max-width: 1440px) {
     font-size: 2rem;
