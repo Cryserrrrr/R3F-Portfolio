@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import styled from "styled-components"
 import NavBar from "../components/navBar"
 import LandingPage from "../components/LandingPage"
@@ -33,8 +33,8 @@ const Container = styled.div`
 
 function HomePage() {
 
-  const [landingRef, isLandingVisible] = useInView({ threshold: 0.5 });
-  const [aboutRef, isAboutVisible] = useInView({ threshold: 0.5 });
+  const [landingRef, isLandingVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
+  const [aboutRef, isAboutVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const setCurrentPage = useStore((state: any) => state.setCurrentPage);
 
   useEffect(() => {

@@ -36,7 +36,7 @@ export default function FlowField() {
   useEffect(() => {
     const fontLoader = new FontLoader();
     fontLoader.load("/fonts/Pavelt.json", (loadedFont) => {
-      setFont(loadedFont);
+      setFont(loadedFont as any); // Type assertion to fix type error
     });
 
     let lastScrollY = window.scrollY;
@@ -99,9 +99,8 @@ export default function FlowField() {
       height: 0.05,
       curveSegments: GetCurveSegment(screenType, currentPage, hoveredText)
     });
-
     geometry.center();
-    const bufferGeometry = geometry instanceof THREE.BufferGeometry ? geometry : new THREE.BufferGeometry().fromGeometry(geometry);
+    const bufferGeometry = geometry;
     const positions = bufferGeometry.attributes.position.array;
     const particlePositions: number[] = [];
     const density = 0.008;
@@ -174,8 +173,8 @@ export default function FlowField() {
     }
 
     positions.needsUpdate = true;
-    if (mesh.current && mesh.current.material.uniforms.uTime) {
-      mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
+    if (mesh.current && (mesh.current.material as THREE.ShaderMaterial).uniforms?.uTime) {
+      (mesh.current.material as THREE.ShaderMaterial).uniforms.uTime.value = clock.getElapsedTime();
     }
   });
 
