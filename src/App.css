@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/Yapari.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pavelt';
+  src: url('/fonts/Pavelt.ttf') format('truetype');
+}
+
+html,
+body,
+#root
+{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(24, 24, 24);
+  font-family: 'Pavelt', sans-serif;
+  color: white;
+  user-select: none;
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+}
