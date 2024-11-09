@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 4rem);
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   padding: 2rem;
 
   @media (max-width: 1440px) {

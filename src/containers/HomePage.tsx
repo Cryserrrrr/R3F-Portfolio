@@ -3,6 +3,8 @@ import styled from "styled-components"
 import NavBar from "../components/navBar"
 import LandingPage from "../components/LandingPage"
 import About from "../components/About"
+import Work from "../components/Work"
+
 import useInView from "../utils/InView"
 import useStore from "../store/Store"
 
@@ -35,6 +37,7 @@ function HomePage() {
 
   const [landingRef, isLandingVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const [aboutRef, isAboutVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
+  const [workRef, isWorkVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const setCurrentPage = useStore((state: any) => state.setCurrentPage);
 
   useEffect(() => {
@@ -42,8 +45,10 @@ function HomePage() {
       setCurrentPage(0);
     } else if (isAboutVisible) {
       setCurrentPage(1);
+    } else if (isWorkVisible) {
+      setCurrentPage(2);
     }
-  }, [isLandingVisible, isAboutVisible]);
+  }, [isLandingVisible, isAboutVisible, isWorkVisible]);
 
   return (
     <Container>
@@ -53,6 +58,9 @@ function HomePage() {
       </div>
       <div ref={aboutRef} id="About">
         <About />
+      </div>
+      <div ref={workRef} id="Work">
+        <Work />
       </div>
     </Container>
   )

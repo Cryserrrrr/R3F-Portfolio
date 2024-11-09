@@ -9,6 +9,7 @@ import useStore from "../store/Store";
 import { ScreenType } from "../utils/ScreenSize";
 import GetSize from "../utils/GetSize";
 import GetCurveSegment from "../utils/GetCurveSegment";
+
 export default function FlowField() {
   const hoveredText = useStore((state) => state.hoveredText);
   const screenType = useStore((state) => state.screenType);

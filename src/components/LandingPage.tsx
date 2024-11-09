@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  transition: height 0.3s ease;
 
   @media (max-width: 768px) {
     height: calc(var(--vh, 1vh) * 100);
