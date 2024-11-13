@@ -20,7 +20,7 @@ export default function FlowField() {
   const [scrollSpeed, setScrollSpeed] = useState(1);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [notInWordParticles, setNotInWordParticles] = useState<boolean[]>([]);
-  const [shouldResetParticles, setShouldResetParticles] = useState(false);
+  const [shouldResetParticles, setShouldResetParticles] = useState(true);
   const [firstRender, setFirstRender] = useState(true);
   const words = ["Passionate", "Creative", "Curious", "Creative", "Aesthetics", "Ambitions", "Impactful"];
   
@@ -83,10 +83,10 @@ export default function FlowField() {
   useEffect(() => {
     if (currentPage !== 1 && shouldResetParticles) {
       setShouldResetParticles(false);
-    } else if (currentPage === 1) {
+    } else if (currentPage === 1 || hoveredText) {
       setShouldResetParticles(true);
     }
-  }, [currentPage]);
+  }, [currentPage, hoveredText]);
 
   useEffect(() => {
     if (!font) return;
