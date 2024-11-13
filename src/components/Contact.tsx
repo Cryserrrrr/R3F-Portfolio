@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useRef } from "react";
 
 const Container = styled.div`
   width: 100%;
