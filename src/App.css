@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Yapari';
-  src: url('/fonts/Yapari.ttf') format('truetype');
+  src: url('/fonts/Mosafin.ttf') format('truetype');
 }
 
 @font-face {
@@ -29,6 +29,7 @@ body,
 ::-webkit-scrollbar {
   background: transparent;
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {

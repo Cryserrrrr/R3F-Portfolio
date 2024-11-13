@@ -4,6 +4,8 @@ import NavBar from "../components/navBar"
 import LandingPage from "../components/LandingPage"
 import About from "../components/About"
 import Work from "../components/Work"
+import Skills from "../components/Skills"
+import Contact from "../components/Contact"
 
 import useInView from "../utils/InView"
 import useStore from "../store/Store"
@@ -38,6 +40,8 @@ function HomePage() {
   const [landingRef, isLandingVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const [aboutRef, isAboutVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const [workRef, isWorkVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
+  const [skillsRef, isSkillsVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
+  const [contactRef, isContactVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const setCurrentPage = useStore((state: any) => state.setCurrentPage);
 
   useEffect(() => {
@@ -47,8 +51,12 @@ function HomePage() {
       setCurrentPage(1);
     } else if (isWorkVisible) {
       setCurrentPage(2);
+    } else if (isSkillsVisible) {
+      setCurrentPage(3);
+    } else if (isContactVisible) {
+      setCurrentPage(4);
     }
-  }, [isLandingVisible, isAboutVisible, isWorkVisible]);
+  }, [isLandingVisible, isAboutVisible, isWorkVisible, isContactVisible]);
 
   return (
     <Container>
@@ -61,6 +69,12 @@ function HomePage() {
       </div>
       <div ref={workRef} id="Work">
         <Work />
+      </div>
+      <div ref={skillsRef} id="Skills">
+        <Skills />
+      </div>
+      <div ref={contactRef} id="Contact">
+        <Contact />
       </div>
     </Container>
   )

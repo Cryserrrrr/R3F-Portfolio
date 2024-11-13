@@ -58,7 +58,6 @@ function NavBar() {
 
   const scrollToSection = (text: string) => {
     const element = document.getElementById(text);
-    console.log(element);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }

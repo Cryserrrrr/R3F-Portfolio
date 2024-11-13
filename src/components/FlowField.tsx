@@ -18,9 +18,12 @@ export default function FlowField() {
   const [font, setFont] = useState(null);
   const [targetPositions, setTargetPositions] = useState<Float32Array | null>(null);
   const [scrollSpeed, setScrollSpeed] = useState(1);
-  const words = ["Passionate", "Creative", "Curious", "Creative", "Aesthetics", "Ambitions", "Impactful"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-
+  const [notInWordParticles, setNotInWordParticles] = useState<boolean[]>([]);
+  const [shouldResetParticles, setShouldResetParticles] = useState(false);
+  const [firstRender, setFirstRender] = useState(true);
+  const words = ["Passionate", "Creative", "Curious", "Creative", "Aesthetics", "Ambitions", "Impactful"];
+  
   const PARTICLE_COUNT =
     screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 10000 : 10000;
 
@@ -78,7 +81,20 @@ export default function FlowField() {
   }, [currentPage, hoveredText]);
 
   useEffect(() => {
+    if (currentPage !== 1 && shouldResetParticles) {
+      setShouldResetParticles(false);
+    } else if (currentPage === 1) {
+      setShouldResetParticles(true);
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
     if (!font) return;
+    if (!shouldResetParticles && !firstRender) return;
+    setFirstRender(false);
+
+    const particlePositions: number[] = [];
+    const particleTypes: boolean[] = []; // true = hors texte, false = dans le texte
 
     // Use hovered text if available, otherwise use carousel word on page 1
     const textToShow = hoveredText || (currentPage === 1 ? words[currentWordIndex] : '');
@@ -103,7 +119,6 @@ export default function FlowField() {
     geometry.center();
     const bufferGeometry = geometry;
     const positions = bufferGeometry.attributes.position.array;
-    const particlePositions: number[] = [];
     const density = 0.008;
 
     for (let i = 0; i < positions.length; i += 9) {
@@ -137,40 +152,49 @@ export default function FlowField() {
           const y = v1.y * r1 + v2.y * r2 + v3.y * r3;
           const jitter = density * 0.1;
           particlePositions.push(x + (Math.random() - 0.5) * jitter, y + (Math.random() - 0.5) * jitter, 0);
+          particleTypes.push(false); // Ces particules font partie du texte
         }
       }
     }
 
     while (particlePositions.length < PARTICLE_COUNT * 3) {
       particlePositions.push((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 0);
+      particleTypes.push(true); // Ces particules ne font pas partie du texte
     }
 
+    setNotInWordParticles(particleTypes);
     setTargetPositions(new Float32Array(particlePositions.slice(0, PARTICLE_COUNT * 3)));
     geometry.dispose();
     bufferGeometry.dispose();
-  }, [hoveredText, font, currentPage, currentWordIndex]);
+  }, [hoveredText, font, currentPage, currentWordIndex, shouldResetParticles]);
 
   useFrame(({ clock }) => {
     if (!mesh.current || !mesh.current.geometry.attributes.position || !targetPositions) return;
     const positions = mesh.current.geometry.attributes.position;
     const currentPositions = positions.array as Float32Array;
+    const shouldAnimate = currentPage !== 1 && !hoveredText;
+    const lerpFactor = 0.03;
     
     if (scrollSpeed > 0.01) {
       setScrollSpeed(prevSpeed => prevSpeed * 0.95);
     }
     
-    const lerpFactor = 0.03;
     for (let i = 0; i < currentPositions.length; i += 3) {
+      const particleIndex = i / 3;
+      const isBackground = notInWordParticles[particleIndex];
       const targetX = targetPositions[i];
       const targetY = targetPositions[i + 1];
       const targetZ = targetPositions[i + 2];
       
-      // Only apply sine/cosine animation when not on page 1 and nothing is displayed
-      const shouldAnimate = currentPage !== 1 && !hoveredText;
+      if (isBackground) {
+        currentPositions[i] += (targetX - currentPositions[i]) * lerpFactor + Math.sin(clock.getElapsedTime() + i * 0.01) * 0.002;
+        currentPositions[i + 1] += (targetY - currentPositions[i + 1]) * lerpFactor + Math.cos(clock.getElapsedTime() + i * 0.01) * 0.002;
+        currentPositions[i + 2] += (targetZ - currentPositions[i + 2]) * lerpFactor;
+      }
       
       currentPositions[i] += (targetX - currentPositions[i]) * lerpFactor + (shouldAnimate ? Math.sin(clock.getElapsedTime() + i * 0.01) * 0.001 : 0);
       currentPositions[i + 1] += (targetY - currentPositions[i + 1]) * lerpFactor + (shouldAnimate ? Math.cos(clock.getElapsedTime() + i * 0.01) * 0.001 : 0);
-      currentPositions[i + 2] += (targetZ - currentPositions[i + 2]) * lerpFactor + (scrollSpeed > 0.5 ? -scrollSpeed * 0.01 : 0);
+      currentPositions[i + 2] += (targetZ - currentPositions[i + 2]) * lerpFactor + (scrollSpeed > 0.6 ? -scrollSpeed * 0.01 : 0);
     }
 
     positions.needsUpdate = true;
@@ -188,7 +212,7 @@ export default function FlowField() {
         uniforms={
           { 
             uTime: { value: 0 },
-            uParticlesSize: { value: screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 3.0 : 1.5 }
+            uParticlesSize: { value: screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 2.0 : 1.5 }
           }
         }
         vertexShader={vertexShader}

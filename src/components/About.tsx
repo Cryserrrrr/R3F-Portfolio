@@ -31,6 +31,7 @@ const TextContainer = styled.div`
 
 const Text = styled.div`
   font-size: 2rem;
+  font-family: 'Yapari', sans-serif;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;

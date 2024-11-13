@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
+import Slider from "./Slider";
+
+interface ContentProps {
+  $isopen: boolean;
+  contentheight: number;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -53,15 +59,10 @@ const Category = styled.div`
   }
 `;
 
-interface ContentProps {
-  isopen: boolean;
-  contentheight: number;
-}
-
-const Content = styled.div<ContentProps>`
+const ContentContainer = styled.div<ContentProps>`
   overflow: hidden;
   transition: height 0.3s ease;
-  height: ${props => props.isopen ? `${props.contentheight}px` : "0"};
+  height: ${props => props.$isopen ? `${props.contentheight}px` : "0"};
 `;
 
 function Work() {
@@ -81,13 +82,13 @@ function Work() {
             <Category onClick={() => handleClick(category)}>
               {category}
             </Category>
-            <Content
+            <ContentContainer
               ref={(el) => (contentRefs.current[category] = el)}
-              isopen={open === category}
+              $isopen={open === category}
               contentheight={contentRefs.current[category]?.scrollHeight || 0}
             >
-              <p>Content for {category}</p>
-            </Content>
+              <Slider />
+            </ContentContainer>
           </div>
         ))}
       </SubContainer>
