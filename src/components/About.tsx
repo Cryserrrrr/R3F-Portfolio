@@ -34,11 +34,11 @@ const Text = styled.div`
   font-family: 'Yapari', sans-serif;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   @media (max-width: 375px) {
-    font-size: 1.5rem;
+    font-size: 0.8rem;
   }
 `
 

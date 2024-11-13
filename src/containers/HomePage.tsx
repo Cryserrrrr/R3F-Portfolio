@@ -43,7 +43,8 @@ function HomePage() {
   const [skillsRef, isSkillsVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const [contactRef, isContactVisible] = useInView({ threshold: 0.5 }) as [React.RefObject<HTMLDivElement>, boolean];
   const setCurrentPage = useStore((state: any) => state.setCurrentPage);
-
+  const setHoveredText = useStore((state: any) => state.setHoveredText);
+  const currentPage = useStore((state: any) => state.currentPage);
   useEffect(() => {
     if (isLandingVisible) {
       setCurrentPage(0);
@@ -57,6 +58,10 @@ function HomePage() {
       setCurrentPage(4);
     }
   }, [isLandingVisible, isAboutVisible, isWorkVisible, isContactVisible]);
+
+  useEffect(() => {
+    setHoveredText(null);
+  }, [currentPage]);
 
   return (
     <Container>

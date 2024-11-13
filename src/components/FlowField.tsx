@@ -90,7 +90,7 @@ export default function FlowField() {
 
   useEffect(() => {
     if (!font) return;
-    if (!shouldResetParticles && !firstRender) return;
+    if (!shouldResetParticles && !firstRender && !hoveredText) return;
     setFirstRender(false);
 
     const particlePositions: number[] = [];
@@ -204,7 +204,14 @@ export default function FlowField() {
   });
 
   return (
-    <points ref={mesh} position={[0, 0, 0]}>
+    <points 
+      ref={mesh} 
+      position={[
+        0, 
+        screenType === ScreenType.MOBILE ? 0.3 : 0, // Déplace vers le haut sur mobile
+        0
+      ]}
+    >
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" array={initialParticles} count={PARTICLE_COUNT} itemSize={3} />
       </bufferGeometry>
