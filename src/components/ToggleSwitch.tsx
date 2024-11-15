@@ -8,7 +8,7 @@ interface ToggleSwitchProps {
 }
 
 interface ToggleLabelProps {
-  isChecked: boolean;
+  $ischecked: boolean;
 }
 
 const ToggleContainer = styled.div`
@@ -47,7 +47,7 @@ const ToggleLabel = styled.label<ToggleLabelProps>`
     height: 100%;
     background-color: #fff;
     top: 0;
-    left: ${(props) => (props.isChecked ? "50%" : "0")};
+    left: ${(props) => (props.$ischecked ? "50%" : "0")};
     transition: left 0.3s ease-in-out, background-color 0.3s ease-in-out;
   }
 `;
@@ -79,7 +79,7 @@ const ToggleSwitch = ({ ischecked, onChange, labelLeft, labelRight }: ToggleSwit
         checked={ischecked}
         onChange={onChange}
       />
-      <ToggleLabel htmlFor="toggle" isChecked={ischecked}>
+      <ToggleLabel htmlFor="toggle" $ischecked={ischecked}>
         <LabelText className="left">{labelLeft}</LabelText>
         <LabelText className="right">{labelRight}</LabelText>
       </ToggleLabel>

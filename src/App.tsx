@@ -21,23 +21,19 @@ function App() {
   })
 
   useEffect(() => {
-    // Détection de la langue du navigateur
     const language = navigator.language.split('-')[0];
     setLanguage(language === 'fr' ? 'fr' : 'en');
 
     const sounds = [bass, woosh];
-    // Charger tous les sons
     const loadAudio = (src: string) => {
       return new Promise((resolve, reject) => {
         const audio = new Audio(src);
         audio.preload = 'auto';
 
-        // Quand le son est complètement chargé
         const handleCanPlayThrough = () => {
           resolve(void 0);
         };
 
-        // Gestion des erreurs
         const handleError = () => {
           console.error(src);
           reject();
@@ -46,7 +42,6 @@ function App() {
         audio.addEventListener('canplaythrough', handleCanPlayThrough);
         audio.addEventListener('error', handleError);
 
-        // Nettoyage
         return () => {
           audio.removeEventListener('canplaythrough', handleCanPlayThrough);
           audio.removeEventListener('error', handleError);
@@ -65,28 +60,27 @@ function App() {
 
   const playBassSound = () => {
     const audio = new Audio(bass);
-    audio.volume = 0; // Démarrer avec un volume à 0
+    audio.volume = 0;
     audio.loop = true;
     audio.play();
   
-    // Durée du fade-in en millisecondes
-    const fadeDuration = 3000; // 3 secondes
-    const intervalTime = 50; // Intervalle de temps entre chaque incrément (ms)
-    const maxVolume = 0.1; // Volume final
-    const increment = maxVolume / (fadeDuration / intervalTime); // Augmentation par étape
+    const fadeDuration = 3000;
+    const intervalTime = 50;
+    const maxVolume = 0.1;
+    const increment = maxVolume / (fadeDuration / intervalTime);
   
     const fadeIn = setInterval(() => {
       if (audio.volume < maxVolume) {
         audio.volume = Math.min(audio.volume + increment, maxVolume);
       } else {
-        clearInterval(fadeIn); // Arrêter le fade-in une fois le volume maximum atteint
+        clearInterval(fadeIn);
       }
     }, intervalTime);
   };
   
 
   const playWooshSound = () => {
-    if (soundOn) {
+    if (soundOn && !isLoading) {
       const audio = new Audio(woosh);
       audio.volume = 0.2;
       audio.play();

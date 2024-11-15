@@ -25,20 +25,16 @@ export const useScreenSize = () => {
   };
 
   const setViewportHeight = () => {
-    // On définit une variable CSS personnalisée "--vh" avec la hauteur visible de l'écran.
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
   };
   
-  // Initial check
   const screenType = handleResize();
   
   if (screenType === ScreenType.TABLET || screenType === ScreenType.MOBILE) {
     setViewportHeight();
   }
 
-  // Add event listener
   window.addEventListener('resize', handleResize);
 
-  // Cleanup
   return screenType;
 };

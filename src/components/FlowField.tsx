@@ -43,7 +43,7 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
   useEffect(() => {
     const fontLoader = new FontLoader();
     fontLoader.load("/fonts/Pavelt.json", (loadedFont) => {
-      setFont(loadedFont as any); // Type assertion to fix type error
+      setFont(loadedFont as any);
     });
 
     let lastScrollY = window.scrollY;
@@ -53,15 +53,11 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
       const currentTimestamp = Date.now();
     
       const deltaY = Math.abs(currentScrollY - lastScrollY);
-      const deltaTime = (currentTimestamp - lastTimestamp) / 1000; // Convertir en secondes
-    
-      // Calculer la vitesse en pixels par seconde
+      const deltaTime = (currentTimestamp - lastTimestamp) / 1000;
+      
       const speed = deltaY / deltaTime;
+      const maxSpeed = 10000;
     
-      // Définir la vitesse maximale attendue pour la normalisation
-      const maxSpeed = 10000; // Ajuste cette valeur en fonction de tes besoins
-    
-      // Normaliser la vitesse pour qu'elle soit entre 0 et 1
       const normalizedSpeed = Math.min(speed / maxSpeed, 1);
     
       setScrollSpeed(normalizedSpeed);
@@ -96,14 +92,12 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
     if (!shouldResetParticles && !firstRender && !hoveredText && hoveredText === prevHoveredText) return;
     setPrevHoveredText(hoveredText);
     setFirstRender(false);
-
-    // Jouer le son quand les particules vont bouger pour former un nouveau mot
+    
     playWooshSound();
 
     const particlePositions: number[] = [];
-    const particleTypes: boolean[] = []; // true = hors texte, false = dans le texte
+    const particleTypes: boolean[] = [];
 
-    // Use hovered text if available, otherwise use carousel word on page 1
     const textToShow = hoveredText || (currentPage === 1 ? words[currentWordIndex] : '');
 
     if (!textToShow) {
@@ -159,14 +153,14 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
           const y = v1.y * r1 + v2.y * r2 + v3.y * r3;
           const jitter = density * 0.1;
           particlePositions.push(x + (Math.random() - 0.5) * jitter, y + (Math.random() - 0.5) * jitter, 0);
-          particleTypes.push(false); // Ces particules font partie du texte
+          particleTypes.push(false);
         }
       }
     }
 
     while (particlePositions.length < PARTICLE_COUNT * 3) {
       particlePositions.push((Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, 0);
-      particleTypes.push(true); // Ces particules ne font pas partie du texte
+      particleTypes.push(true);
     }
 
     setNotInWordParticles(particleTypes);
@@ -215,7 +209,7 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
       ref={mesh} 
       position={[
         0, 
-        screenType === ScreenType.MOBILE ? 0.3 : 0, // Déplace vers le haut sur mobile
+        screenType === ScreenType.MOBILE ? 0.3 : 0,
         0
       ]}
     >

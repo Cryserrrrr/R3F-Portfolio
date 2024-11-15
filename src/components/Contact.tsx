@@ -20,7 +20,7 @@ type FormData = {
 };
 
 interface ErrorProps {
-  error: boolean;
+  $error: boolean;
 }
 
 const Container = styled.div`
@@ -85,7 +85,7 @@ const Input = styled.input<ErrorProps>`
   height: 2rem;
   font-family: "Yapari", sans-serif;
   outline: none;
-  border: ${props => props.error ? "2px solid #f00" : "2px solid #fff"};
+  border: ${props => props.$error ? "2px solid #f00" : "2px solid #fff"};
   background-color: transparent;
   font-size: 1rem;
   color: #fff;
@@ -117,7 +117,7 @@ const Textarea = styled.textarea<ErrorProps>`
   padding: 0.5rem;
   font-family: "Yapari", sans-serif;
   outline: none;
-  border: ${props => props.error ? "2px solid #f00" : "2px solid #fff"};
+  border: ${props => props.$error ? "2px solid #f00" : "2px solid #fff"};
   background-color: transparent;
   font-size: 1rem;
   resize: none;
@@ -241,7 +241,7 @@ function Contact() {
               onFocus={() => handleFocus(messages[language as keyof typeof messages].email)}
               onChange={handleChange}
               value={formData.email}
-              error={error.email}
+              $error={error.email}
               onBlur={onBlur}
             />
             <Input 
@@ -251,7 +251,7 @@ function Contact() {
               onFocus={() => handleFocus(messages[language as keyof typeof messages].name)}
               onChange={handleChange}
               value={formData.name}
-              error={error.name}
+              $error={error.name}
               onBlur={onBlur}
             />
           </InputContainer>
@@ -262,7 +262,7 @@ function Contact() {
             onFocus={() => handleFocus(messages[language as keyof typeof messages].subject)}
             onChange={handleChange}
             value={formData.subject}
-            error={error.subject}
+            $error={error.subject}
             onBlur={onBlur}
           />
           <Textarea 
@@ -271,7 +271,7 @@ function Contact() {
             onFocus={() => handleFocus(messages[language as keyof typeof messages].message)}
             onChange={handleChange}
             value={formData.message}
-            error={error.message}
+            $error={error.message}
             onBlur={onBlur}
           />
           {isLoading ? <Loading /> : <Button type="submit">{messages[language as keyof typeof messages].send}</Button>}

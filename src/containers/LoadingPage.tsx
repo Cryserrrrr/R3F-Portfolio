@@ -7,7 +7,7 @@ import volumeLine from '/images/volume_line.svg'
 import volumeOff from '/images/volume_off.svg'
 
 interface ToggleSoundProps {
-  isChecked: boolean;
+  $ischecked: boolean;
 }
 
 const Container = styled.div`
@@ -81,7 +81,7 @@ const ToggleSound = styled.div<ToggleSoundProps>`
   border-radius: 50%;
   border: 2px solid #fff;
   margin-left: 20px;
-  background-color: ${(props) => props.isChecked ? "#fff" : "transparent"};
+  background-color: ${(props) => props.$ischecked ? "#fff" : "transparent"};
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -97,7 +97,7 @@ const LoadingPage = ({ setIsLoading, soundLoaded, setSoundOn, soundOn }: { setIs
       <Title>{messages[language as keyof typeof messages].welcome}</Title>
       <ToggleContainer>
         <ToggleSwitch ischecked={language === "fr"} onChange={() => setLanguage(language === "fr" ? "en" : "fr")} labelLeft="FR" labelRight="EN" />
-        <ToggleSound isChecked={soundOn} onClick={() => setSoundOn(!soundOn)}>
+        <ToggleSound $ischecked={soundOn} onClick={() => setSoundOn(!soundOn)}>
           <img src={soundOn ? volumeLine : volumeOff} alt="volume" />
         </ToggleSound>
       </ToggleContainer>
