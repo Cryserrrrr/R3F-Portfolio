@@ -4,6 +4,8 @@ import useStore from "../store/Store";
 import { skills } from "../utils/Skills";
 import { ScreenType } from "../utils/ScreenSize";
 import messages from '../utils/Messages'
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer";
 
 type Skill = typeof skills[number];
 
@@ -48,7 +50,10 @@ const SkillContainer = styled.div`
   margin-top: 1.5rem;
 `;
 
-const Skill = styled.div`
+const SkillDescription = styled(motion.div)`
+`;
+
+const Skill = styled(motion.div)`
   background-color: #242424;
   width: 130px;
   height: 130px;
@@ -110,13 +115,37 @@ function Skills() {
     }
   };
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <Container>
       <SubContainer>
-        {messages[language as keyof typeof messages].skillDescription}
+        <SkillDescription
+          ref={ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          {messages[language as keyof typeof messages].skillDescription}
+        </SkillDescription>
         <SkillContainer>
-          {skills.map((skill) => (
-            <Skill key={skill.name} onMouseEnter={() => handleMouseEnter(skill.name)} onMouseLeave={handleMouseLeave} onClick={() => handleClick(skill)}>
+          {skills.map((skill, index) => (
+            <Skill
+              key={skill.name}
+              onMouseEnter={() => handleMouseEnter(skill.name)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleClick(skill)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut"
+              }}
+            >
               <SkillImageContainer>
                 <SkillImage src={skill.image} alt={skill.name} />
               </SkillImageContainer>

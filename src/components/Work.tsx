@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Slider from "./Slider";
 import messages from '../utils/Messages'
 import useStore from '../store/Store'
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer";
 
 interface ContentProps {
   $isopen: boolean;
@@ -21,7 +23,7 @@ const Container = styled.div`
   }
 `;
 
-const SubContainer = styled.div`
+const SubContainer = styled(motion.div)`
   padding-bottom: 2rem;
 
   @media (max-width: 1440px) {
@@ -77,9 +79,19 @@ function Work() {
     setOpen(open === category ? null : category);
   };
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <Container>
-      <SubContainer>
+      <SubContainer
+        ref={ref}
+        initial={{ opacity: 0, y: 100 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1 }}
+      >
         {categories.map((category) => (
           <div key={category}>
             <Category onClick={() => handleClick(category)}>

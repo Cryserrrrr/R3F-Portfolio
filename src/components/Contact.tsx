@@ -4,7 +4,8 @@ import emailjs from "emailjs-com";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import messages from "../utils/Messages";
-
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 type Error = {
   email: boolean;
   name: boolean;
@@ -35,7 +36,7 @@ const Container = styled.div`
   }
 `;
 
-const SubContainer = styled.div`
+const SubContainer = styled(motion.div)`
   padding-bottom: 5rem;
   width: 50%;
 
@@ -130,12 +131,12 @@ const Textarea = styled.textarea<ErrorProps>`
 `;
 
 const Button = styled.button`
-  width: 15%;
+  width: 20%;
   height: 100%;
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin-top: 1rem;
-  font-family: "Yapari", sans-serif;
+  font-family: "Pavelt", sans-serif;
   outline: none;
   border: 0;
   font-size: 1rem;
@@ -229,9 +230,19 @@ function Contact() {
     });
   };
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <Container>
-      <SubContainer>
+      <SubContainer
+        ref={ref}
+        initial={{ opacity: 0, y: 100 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1 }}
+      >
         <Form onSubmit={handleSubmit}>
           <InputContainer>
             <Input 

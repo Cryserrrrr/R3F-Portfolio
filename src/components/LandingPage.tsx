@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { motion } from "framer-motion"
 import messages from '../utils/Messages'
 import useStore from '../store/Store'
 
@@ -15,7 +16,7 @@ const Container = styled.div`
   }
 `
 
-const TitleContainer = styled.div`
+const TitleContainer = styled(motion.div)`
   padding-bottom: 5rem;
 
   @media (max-width: 1440px) {
@@ -69,7 +70,11 @@ function LandingPage() {
 
   return (
     <Container>
-      <TitleContainer>
+      <TitleContainer
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <Title>Eliott Le Duc</Title>
         <Subtitle>{messages[language as keyof typeof messages].subTitle}</Subtitle>
       </TitleContainer>

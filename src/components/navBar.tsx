@@ -1,7 +1,8 @@
-import styled from "styled-components"
-import useStore from "../store/Store"
-import messages from '../utils/Messages'
-import { ScreenType } from "../utils/ScreenSize"
+import styled from "styled-components";
+import { motion } from "framer-motion"; // Import Framer Motion
+import useStore from "../store/Store";
+import messages from "../utils/Messages";
+import { ScreenType } from "../utils/ScreenSize";
 
 const Container = styled.div`
   position: fixed;
@@ -31,18 +32,18 @@ const Container = styled.div`
     padding: 0.5rem;
     width: calc(100% - 1rem);
   }
-`
+`;
 
-const Element = styled.div`
+const MotionElement = styled(motion.div)`
   cursor: pointer;
   transition: color 0.3s ease;
+
   &.active {
     color: #1f53c7;
   }
-`
+`;
 
 function NavBar() {
-
   const setMousePosition = useStore((state) => state.setMousePosition);
   const setHoveredText = useStore((state) => state.setHoveredText);
   const currentPage = useStore((state) => state.currentPage);
@@ -57,7 +58,10 @@ function NavBar() {
   };
 
   const handleMouseEnter = (text: string) => {
-    if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
+    if (
+      screenType === ScreenType.SMALL_DESKTOP ||
+      screenType === ScreenType.LARGE_DESKTOP
+    ) {
       setHoveredText(text);
     }
   };
@@ -65,23 +69,32 @@ function NavBar() {
   const scrollToSection = (text: string) => {
     const element = document.getElementById(text);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <Container onMouseMove={handleMouseMove}>
       {messages[language as keyof typeof messages].navBar.map((text, index) => (
-        <Element 
+        <MotionElement
           onMouseEnter={() => handleMouseEnter(text)}
           onMouseLeave={() => setHoveredText(null)}
           key={text}
           className={index === currentPage - 1 ? "active" : ""}
           onClick={() => scrollToSection(messages["en"].navBar[index])}
-        >{text}</Element>
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: "easeOut",
+          }}
+        >
+          {text}
+        </MotionElement>
       ))}
     </Container>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;
