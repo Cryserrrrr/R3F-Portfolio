@@ -3,6 +3,7 @@ import useStore from "../store/Store";
 import emailjs from "emailjs-com";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
+import messages from "../utils/Messages";
 
 type Error = {
   email: boolean;
@@ -40,14 +41,17 @@ const SubContainer = styled.div`
 
   @media (max-width: 1440px) {
     padding-bottom: 5rem;
+    width: 60%;
   }
 
   @media (max-width: 768px) {
     padding-bottom: 2rem;
+    width: 80%;
   }
 
   @media (max-width: 375px) {
     padding-bottom: 1rem;
+    width: 90%;
   }
 `;
 
@@ -65,6 +69,12 @@ const InputContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Input = styled.input<ErrorProps>`
@@ -83,11 +93,20 @@ const Input = styled.input<ErrorProps>`
   &::placeholder {
     color: #fff;
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-top: 1rem;
+  }
 `;
 
 const LargeInput = styled(Input)`
   width: 98%;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const Textarea = styled.textarea<ErrorProps>`
@@ -122,10 +141,16 @@ const Button = styled.button`
   font-size: 1rem;
   background-color: #fff;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 50%
+  }
 `;
 
 function Contact() {
   const setHoveredText = useStore((state) => state.setHoveredText);
+  const language = useStore((state) => state.language);
+
   const [error, setError] = useState<Error>({
     email: false,
     name: false,
@@ -212,8 +237,8 @@ function Contact() {
             <Input 
               type="email" 
               name="email"
-              placeholder="Email"
-              onFocus={() => handleFocus("Email")}
+              placeholder={messages[language as keyof typeof messages].email}
+              onFocus={() => handleFocus(messages[language as keyof typeof messages].email)}
               onChange={handleChange}
               value={formData.email}
               error={error.email}
@@ -222,8 +247,8 @@ function Contact() {
             <Input 
               type="text" 
               name="name"
-              placeholder="Name"
-              onFocus={() => handleFocus("Name")}
+              placeholder={messages[language as keyof typeof messages].name}
+              onFocus={() => handleFocus(messages[language as keyof typeof messages].name)}
               onChange={handleChange}
               value={formData.name}
               error={error.name}
@@ -233,8 +258,8 @@ function Contact() {
           <LargeInput 
             type="text" 
             name="subject"
-            placeholder="Subject"
-            onFocus={() => handleFocus("Subject")}
+            placeholder={messages[language as keyof typeof messages].subject}
+            onFocus={() => handleFocus(messages[language as keyof typeof messages].subject)}
             onChange={handleChange}
             value={formData.subject}
             error={error.subject}
@@ -242,14 +267,14 @@ function Contact() {
           />
           <Textarea 
             name="message"
-            placeholder="Message"
-            onFocus={() => handleFocus("Message")}
+            placeholder={messages[language as keyof typeof messages].message}
+            onFocus={() => handleFocus(messages[language as keyof typeof messages].message)}
             onChange={handleChange}
             value={formData.message}
             error={error.message}
             onBlur={onBlur}
           />
-          {isLoading ? <Loading /> : <Button type="submit">Send</Button>}
+          {isLoading ? <Loading /> : <Button type="submit">{messages[language as keyof typeof messages].send}</Button>}
         </Form>
       </SubContainer>
     </Container>

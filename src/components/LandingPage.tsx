@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import messages from '../utils/Messages'
+import useStore from '../store/Store'
 
 const Container = styled.div`
   width: 100%;
@@ -63,12 +65,13 @@ const Subtitle = styled.h2`
 `
 
 function LandingPage() {
+  const language = useStore((state) => state.language);
 
   return (
     <Container>
       <TitleContainer>
         <Title>Eliott Le Duc</Title>
-        <Subtitle>Creative and Full Stack Developer</Subtitle>
+        <Subtitle>{messages[language as keyof typeof messages].subTitle}</Subtitle>
       </TitleContainer>
     </Container>
   )

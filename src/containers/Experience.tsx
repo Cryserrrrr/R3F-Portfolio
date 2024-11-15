@@ -10,13 +10,13 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-function Experience() {
+function Experience({ playWooshSound }: { playWooshSound: () => void }) {
   return (
     <Container>
       <Canvas camera={{ position: [0, 0, 1] }}>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <FlowField />
+        <FlowField playWooshSound={() => playWooshSound()} />
       </Canvas>
     </Container>
   );

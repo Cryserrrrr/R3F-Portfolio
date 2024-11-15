@@ -1,6 +1,8 @@
-import styled from "styled-components";
 import { useState, useRef } from "react";
+import styled from "styled-components";
 import Slider from "./Slider";
+import messages from '../utils/Messages'
+import useStore from '../store/Store'
 
 interface ContentProps {
   $isopen: boolean;
@@ -66,8 +68,9 @@ const ContentContainer = styled.div<ContentProps>`
 `;
 
 function Work() {
+  const language = useStore((state) => state.language);
   const [open, setOpen] = useState<string | null>(null);
-  const categories = ["Experiences", "Projects", "Shaders"];
+  const categories = [messages[language as keyof typeof messages].experiences, messages[language as keyof typeof messages].projects, messages[language as keyof typeof messages].shaders];
   const contentRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleClick = (category: string) => {

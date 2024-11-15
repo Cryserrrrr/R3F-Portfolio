@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useStore from "../store/Store";
 import { skills } from "../utils/Skills";
 import { ScreenType } from "../utils/ScreenSize";
+import messages from '../utils/Messages'
 
 type Skill = typeof skills[number];
 
@@ -87,6 +88,7 @@ const SkillImage = styled.img`
 function Skills() {
   const setHoveredText = useStore((state: { setHoveredText: (text: string | null) => void }) => state.setHoveredText);
   const screenType = useStore((state) => state.screenType);
+  const language = useStore((state) => state.language);
 
   const handleClick = (skill: Skill) => {
     if (screenType !== ScreenType.MOBILE && screenType !== ScreenType.TABLET) {
@@ -111,7 +113,7 @@ function Skills() {
   return (
     <Container>
       <SubContainer>
-        Leveraging three years of professional experience, a solid academic foundation, and personal projects, I have cultivated a diverse skill set, including:
+        {messages[language as keyof typeof messages].skillDescription}
         <SkillContainer>
           {skills.map((skill) => (
             <Skill key={skill.name} onMouseEnter={() => handleMouseEnter(skill.name)} onMouseLeave={handleMouseLeave} onClick={() => handleClick(skill)}>

@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import messages from '../utils/Messages'
+import useStore from '../store/Store'
 
 const Container = styled.div`
   width: 100%;
@@ -43,16 +45,11 @@ const Text = styled.div`
 `
 
 function About() {
-
+  const language = useStore((state) => state.language);
   return (
     <Container>
       <TextContainer>
-        <Text>
-          Full stack and creative developer with three years of industry experience,
-          I am passionate about innovation and continuously learning new technologies. 
-          Curious and creative, I enjoy designing unique and effective solutions by combining technical expertise with an eye for aesthetics. 
-          This portfolio reflects my journey and ambitions as a freelancer, where each project is an opportunity to explore, learn, and create impactful digital experiences.
-        </Text>
+        <Text>{messages[language as keyof typeof messages].description}</Text>
       </TextContainer>
     </Container>
   )

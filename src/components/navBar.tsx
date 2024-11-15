@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import useStore from "../store/Store"
+import messages from '../utils/Messages'
+import { ScreenType } from "../utils/ScreenSize"
 
 const Container = styled.div`
   position: fixed;
@@ -19,7 +21,7 @@ const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.7rem;
     padding: 1rem;
     width: calc(100% - 2rem);
   }
@@ -44,6 +46,8 @@ function NavBar() {
   const setMousePosition = useStore((state) => state.setMousePosition);
   const setHoveredText = useStore((state) => state.setHoveredText);
   const currentPage = useStore((state) => state.currentPage);
+  const language = useStore((state) => state.language);
+  const screenType = useStore((state) => state.screenType);
 
   const handleMouseMove = (event: any) => {
     setMousePosition({
@@ -53,7 +57,9 @@ function NavBar() {
   };
 
   const handleMouseEnter = (text: string) => {
-    setHoveredText(text);
+    if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
+      setHoveredText(text);
+    }
   };
 
   const scrollToSection = (text: string) => {
@@ -65,13 +71,13 @@ function NavBar() {
 
   return (
     <Container onMouseMove={handleMouseMove}>
-      {["About", "Work", "Skills", "Contact"].map((text, index) => (
+      {messages[language as keyof typeof messages].navBar.map((text, index) => (
         <Element 
           onMouseEnter={() => handleMouseEnter(text)}
           onMouseLeave={() => setHoveredText(null)}
           key={text}
           className={index === currentPage - 1 ? "active" : ""}
-          onClick={() => scrollToSection(text)}
+          onClick={() => scrollToSection(messages["en"].navBar[index])}
         >{text}</Element>
       ))}
     </Container>

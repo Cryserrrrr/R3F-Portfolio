@@ -9,11 +9,13 @@ import useStore from "../store/Store";
 import { ScreenType } from "../utils/ScreenSize";
 import GetSize from "../utils/GetSize";
 import GetCurveSegment from "../utils/GetCurveSegment";
+import messages from "../utils/Messages";
 
-export default function FlowField() {
+export default function FlowField({ playWooshSound }: { playWooshSound: () => void }) {
   const hoveredText = useStore((state) => state.hoveredText);
   const screenType = useStore((state) => state.screenType);
   const currentPage = useStore((state) => state.currentPage);
+  const language = useStore((state) => state.language);
   const mesh = useRef<THREE.Points>(null!);
   const [font, setFont] = useState(null);
   const [targetPositions, setTargetPositions] = useState<Float32Array | null>(null);
@@ -23,10 +25,10 @@ export default function FlowField() {
   const [shouldResetParticles, setShouldResetParticles] = useState(true);
   const [firstRender, setFirstRender] = useState(true);
   const [prevHoveredText, setPrevHoveredText] = useState('');
-  const words = ["Passionate", "Creative", "Curious", "Creative", "Aesthetics", "Ambitions", "Impactful"];
+  const words = messages[language as keyof typeof messages].words;
   
   const PARTICLE_COUNT =
-    screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 10000 : 10000;
+    screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 15000 : 10000;
 
   const initialParticles = useMemo(() => {
     const positions = new Float32Array(PARTICLE_COUNT * 3);
@@ -94,6 +96,9 @@ export default function FlowField() {
     if (!shouldResetParticles && !firstRender && !hoveredText && hoveredText === prevHoveredText) return;
     setPrevHoveredText(hoveredText);
     setFirstRender(false);
+
+    // Jouer le son quand les particules vont bouger pour former un nouveau mot
+    playWooshSound();
 
     const particlePositions: number[] = [];
     const particleTypes: boolean[] = []; // true = hors texte, false = dans le texte
@@ -175,7 +180,7 @@ export default function FlowField() {
     const positions = mesh.current.geometry.attributes.position;
     const currentPositions = positions.array as Float32Array;
     const shouldAnimate = currentPage !== 1 && !hoveredText;
-    const lerpFactor = 0.03;
+    const lerpFactor = 0.02;
     
     if (scrollSpeed > 0.01) {
       setScrollSpeed(prevSpeed => prevSpeed * 0.95);

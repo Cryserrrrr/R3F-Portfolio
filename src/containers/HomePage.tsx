@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import styled from "styled-components"
+
 import NavBar from "../components/navBar"
 import LandingPage from "../components/LandingPage"
 import About from "../components/About"
@@ -45,6 +46,7 @@ function HomePage() {
   const setCurrentPage = useStore((state: any) => state.setCurrentPage);
   const setHoveredText = useStore((state: any) => state.setHoveredText);
   const currentPage = useStore((state: any) => state.currentPage);
+
   useEffect(() => {
     if (isLandingVisible) {
       setCurrentPage(0);
