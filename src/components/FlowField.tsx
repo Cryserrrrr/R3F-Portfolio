@@ -22,6 +22,7 @@ export default function FlowField() {
   const [notInWordParticles, setNotInWordParticles] = useState<boolean[]>([]);
   const [shouldResetParticles, setShouldResetParticles] = useState(true);
   const [firstRender, setFirstRender] = useState(true);
+  const [prevHoveredText, setPrevHoveredText] = useState('');
   const words = ["Passionate", "Creative", "Curious", "Creative", "Aesthetics", "Ambitions", "Impactful"];
   
   const PARTICLE_COUNT =
@@ -90,7 +91,8 @@ export default function FlowField() {
 
   useEffect(() => {
     if (!font) return;
-    if (!shouldResetParticles && !firstRender && !hoveredText) return;
+    if (!shouldResetParticles && !firstRender && !hoveredText && hoveredText === prevHoveredText) return;
+    setPrevHoveredText(hoveredText);
     setFirstRender(false);
 
     const particlePositions: number[] = [];

@@ -44,13 +44,13 @@ const SkillContainer = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 `;
 
 const Skill = styled.div`
   background-color: #242424;
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
