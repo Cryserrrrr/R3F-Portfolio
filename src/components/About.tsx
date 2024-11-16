@@ -15,14 +15,8 @@ const Container = styled.div`
 
 const TextContainer = styled(motion.div)`
   padding-bottom: 2rem;
-
-  @media (max-width: 1440px) {
-    padding-bottom: 5rem;
-  }
-
-  @media (max-width: 768px) {
-    padding-bottom: 2rem;
-  }
+  background-color: #000;
+  border-radius: 1rem;
 
   @media (max-width: 375px) {
     padding-bottom: 1rem;
@@ -32,6 +26,10 @@ const TextContainer = styled(motion.div)`
 const Text = styled.div`
   font-size: 2rem;
   font-family: "Yapari", sans-serif;
+
+  @media (max-width: 1440px) {
+    font-size: 1.5rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;

@@ -30,6 +30,11 @@ const Content = styled.div`
     transform: scale(1.1);
   }
 
+  @media (max-width: 1440px) {
+    width: 130px;
+    height: 130px;
+  }
+
   @media (max-width: 768px) {
     width: 100px;
     height: 100px;

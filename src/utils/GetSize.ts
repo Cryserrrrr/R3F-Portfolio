@@ -4,25 +4,25 @@ const GetSize = (screenType: ScreenType, currentPage: number, hoveredText: strin
   let size = 0.08;
   if (currentPage === 1 && !hoveredText) {
     if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
-      size = 0.2;
+      size = 0.15;
     } else {
       size = 0.06;
     }
   } else if (currentPage === 2 && hoveredText) {
     if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
-      size = 0.2;
+      size = 0.15;
     } else {
       size = 0.05;
     }
   } else if (currentPage === 4 && hoveredText) {
     if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
-      size = 0.2;
+      size = 0.15;
     } else {
       size = 0.05;
     }
   } else {
     if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
-      size = 0.3;
+      size = 0.2;
     } else {
       size = 0.08;
     }

@@ -220,7 +220,7 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
         uniforms={
           { 
             uTime: { value: 0 },
-            uParticlesSize: { value: screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 2.0 : 1.5 }
+            uParticlesSize: { value: 1.5 }
           }
         }
         vertexShader={vertexShader}

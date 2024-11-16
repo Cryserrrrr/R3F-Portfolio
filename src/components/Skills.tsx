@@ -47,6 +47,9 @@ const SkillContainer = styled.div`
 `;
 
 const SkillDescription = styled(motion.div)`
+  background-color: #000;
+  border-radius: 1rem;
+  width: fit-content;
 `;
 
 const Skill = styled(motion.div)`
@@ -62,6 +65,11 @@ const Skill = styled(motion.div)`
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
+  }
+    
+  @media (max-width: 1440px) {
+    width: 90px;
+    height: 90px;
   }
 
   @media (max-width: 768px) {

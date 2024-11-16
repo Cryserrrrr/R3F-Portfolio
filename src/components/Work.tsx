@@ -23,14 +23,6 @@ const Container = styled.div`
 const SubContainer = styled(motion.div)`
   padding-bottom: 2rem;
 
-  @media (max-width: 1440px) {
-    padding-bottom: 5rem;
-  }
-
-  @media (max-width: 768px) {
-    padding-bottom: 2rem;
-  }
-
   @media (max-width: 375px) {
     padding-bottom: 1rem;
   }
@@ -48,7 +40,7 @@ const Category = styled.div`
   }
 
   @media (max-width: 1440px) {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   @media (max-width: 768px) {

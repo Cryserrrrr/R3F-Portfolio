@@ -37,7 +37,7 @@ const Title = styled.h1`
   margin: 0;
 
   @media (max-width: 1440px) {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   @media (max-width: 768px) {
@@ -53,7 +53,7 @@ const Subtitle = styled.h2`
   font-size: 2.5rem;
 
   @media (max-width: 1440px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   @media (max-width: 768px) {

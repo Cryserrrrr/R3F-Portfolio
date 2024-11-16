@@ -16,7 +16,7 @@ const Container = styled.div`
   padding: 2rem;
 
   @media (max-width: 1440px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding: 2rem;
     width: calc(100% - 4rem);
   }

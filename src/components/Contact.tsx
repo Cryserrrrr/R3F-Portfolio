@@ -37,7 +37,7 @@ const SubContainer = styled(motion.div)`
   width: 50%;
 
   @media (max-width: 1440px) {
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
     width: 60%;
   }
 

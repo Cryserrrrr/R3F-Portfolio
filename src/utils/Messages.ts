@@ -24,7 +24,7 @@ const messages = {
     enter: "Entrer",
     subTitle: "Developpeur Full Stack et Creatif",
     navBar: ["A propos", "Projets", "Competences", "Contact"],
-    description: "Développeur full stack et créatif avec trois ans d'expérience dans l'industrie, je suis passionné par l'innovation et la continuelle acquisition de nouvelles technologies. Curieux et créatif, j'aime concevoir des solutions uniques et efficaces en combinant expertise technique et sens pour l'esthétique. Ce portfolio reflète mon parcours et mes ambitions, où chaque projet est une opportunité d'explorer, d'apprendre et de créer des expériences numériques impactantes.",
+    description: "Développeur full stack et créatif avec trois ans d'expérience dans l'industrie, je suis passionné par l'innovation et la continuelle acquisition de nouvelles technologies. Curieux et créatif, j'aime concevoir des solutions uniques et efficaces en combinant expertise technique et sens de l'esthétique. Ce portfolio reflète mon parcours et mes ambitions, où chaque projet est une opportunité d'explorer, d'apprendre et de créer des expériences numériques impactantes.",
     words: ["Passionne", "Creatif", "Curieux", "Creatif", "Esthetique", "Ambitions", "Impactant"],
     experiences: "Experiences",
     projects: "Projets",
@@ -37,7 +37,7 @@ const messages = {
     send: "Envoyer",
     emailSent: "Email envoye",
     error: "Erreur",
-    noShaders: "Je travaille dessus"
+    noShaders: "Section en cours de construction"
   }
 }
 
