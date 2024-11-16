@@ -35,7 +35,7 @@ const messages = {
     subject: "Sujet",
     message: "Message",
     send: "Envoyer",
-    emailSent: "Email envoyé",
+    emailSent: "Email envoye",
     error: "Erreur",
     noShaders: "Je travaille dessus"
   }

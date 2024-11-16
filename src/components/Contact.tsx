@@ -217,8 +217,14 @@ function Contact() {
       formData
     )
     .then(() => {
-      setHoveredText("Email sent");
+      setHoveredText(messages[language as keyof typeof messages].emailSent);
       setIsLoading(false);
+      setFormData({
+        email: "",
+        name: "",
+        subject: "",
+        message: ""
+      });
     })
     .catch(() => {
       setHoveredText("Error");

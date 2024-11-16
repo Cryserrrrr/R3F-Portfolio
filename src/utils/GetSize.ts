@@ -14,6 +14,12 @@ const GetSize = (screenType: ScreenType, currentPage: number, hoveredText: strin
     } else {
       size = 0.05;
     }
+  } else if (currentPage === 4 && hoveredText) {
+    if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
+      size = 0.2;
+    } else {
+      size = 0.05;
+    }
   } else {
     if (screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP) {
       size = 0.3;
