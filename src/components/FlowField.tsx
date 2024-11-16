@@ -7,8 +7,6 @@ import vertexShader from "../shaders/particles/vertex.glsl?raw";
 import fragmentShader from "../shaders/particles/fragment.glsl?raw";
 import useStore from "../store/Store";
 import { ScreenType } from "../utils/ScreenSize";
-import GetSize from "../utils/GetSize";
-import GetCurveSegment from "../utils/GetCurveSegment";
 import messages from "../utils/Messages";
 
 export default function FlowField({ playWooshSound }: { playWooshSound: () => void }) {
@@ -113,9 +111,9 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
 
     const geometry = new TextGeometry(textToShow, {
       font: font,
-      size: GetSize(screenType, currentPage, hoveredText),
+      size: screenType === ScreenType.LARGE_DESKTOP || screenType === ScreenType.SMALL_DESKTOP ? 0.15 : 0.05,
       height: 0.05,
-      curveSegments: GetCurveSegment(screenType, currentPage, hoveredText)
+      curveSegments: screenType === ScreenType.SMALL_DESKTOP || screenType === ScreenType.LARGE_DESKTOP ? 8 : 1
     });
     geometry.center();
     const bufferGeometry = geometry;
