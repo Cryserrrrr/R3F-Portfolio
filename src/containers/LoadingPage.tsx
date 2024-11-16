@@ -78,7 +78,7 @@ const ToggleContainer = styled.div`
   align-items: center;
 `;
 
-const ToggleSound = styled.div<ToggleSoundProps>`
+export const ToggleSound = styled.div<ToggleSoundProps>`
   width: 40px;
   height: 40px;
   border-radius: 50%;
