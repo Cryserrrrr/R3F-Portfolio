@@ -5,6 +5,7 @@ import messages from '../utils/Messages'
 import useStore from '../store/Store'
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer";
+import work from '../utils/Work'
 
 interface ContentProps {
   $isopen: boolean;
@@ -17,10 +18,6 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    height: calc(var(--vh, 1vh) * 100);
-  }
 `;
 
 const SubContainer = styled(motion.div)`
@@ -72,7 +69,6 @@ const ContentContainer = styled.div<ContentProps>`
 function Work() {
   const language = useStore((state) => state.language);
   const [open, setOpen] = useState<string | null>(null);
-  const categories = [messages[language as keyof typeof messages].experiences, messages[language as keyof typeof messages].projects, messages[language as keyof typeof messages].shaders];
   const contentRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleClick = (category: string) => {
@@ -92,17 +88,19 @@ function Work() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1 }}
       >
-        {categories.map((category) => (
+        {Object.keys(work).map((category) => (
           <div key={category}>
             <Category onClick={() => handleClick(category)}>
-              {category}
+              {messages[language as keyof typeof messages][category as keyof typeof work]}
             </Category>
             <ContentContainer
               ref={(el) => (contentRefs.current[category] = el)}
               $isopen={open === category}
               contentheight={contentRefs.current[category]?.scrollHeight || 0}
             >
-              <Slider />
+              {
+                work[category as keyof typeof work].length ? <Slider work={work[category as keyof typeof work]}/> : messages[language as keyof typeof messages].noShaders
+              }
             </ContentContainer>
           </div>
         ))}

@@ -209,7 +209,7 @@ export default function FlowField({ playWooshSound }: { playWooshSound: () => vo
       ref={mesh} 
       position={[
         0, 
-        screenType === ScreenType.MOBILE ? 0.3 : 0,
+        screenType === ScreenType.MOBILE ? 0.2 : 0,
         0
       ]}
     >

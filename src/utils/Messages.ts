@@ -16,7 +16,8 @@ const messages = {
     message: "Message",
     send: "Send",
     emailSent: "Email sent",
-    error: "Error"
+    error: "Error",
+    noShaders: "I'm working on it"
   },
   fr: {
     welcome: "Bienvenue",
@@ -35,7 +36,8 @@ const messages = {
     message: "Message",
     send: "Envoyer",
     emailSent: "Email envoyé",
-    error: "Erreur"
+    error: "Erreur",
+    noShaders: "Je travaille dessus"
   }
 }
 

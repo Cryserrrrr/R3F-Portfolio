@@ -15,10 +15,6 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    height: calc(var(--vh, 1vh) * 100);
-  }
 `;
 
 const SubContainer = styled.div`

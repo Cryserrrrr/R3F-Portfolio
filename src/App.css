@@ -24,6 +24,8 @@ body,
   overflow-x: hidden;
   margin: 0;
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 ::-webkit-scrollbar {
