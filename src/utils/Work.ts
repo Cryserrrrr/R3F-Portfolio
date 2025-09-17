@@ -24,8 +24,8 @@ const work: Work = {
     {
       title: "KcAgenda",
       image: "/images/kcagenda.png",
-      link: "https://kcagenda.com/",
-      github: null,
+      link: null,
+      github: "https://github.com/Cryserrrrr/KcPlanning",
     },
     {
       title: "Openai",
@@ -45,6 +45,18 @@ const work: Work = {
       image: "/images/portfolio.png",
       link: null,
       github: "https://github.com/Cryserrrrr/R3F-Portfolio",
+    },
+    {
+      title: "Twitch Bot",
+      image: "/images/twitch.png",
+      link: null,
+      github: "https://github.com/Cryserrrrr/twitch-bot",
+    },
+    {
+      title: "Discord Bot",
+      image: "/images/discord.jpg",
+      link: null,
+      github: "https://github.com/Cryserrrrr/Kc-match-discord-bot",
     },
   ],
   shaders: [],
